@@ -17,8 +17,10 @@
   };
 
   function renderButter() {
-    const coverage = Number(spreadInput.value);
+    const coverage = Math.min(100, Math.max(0, Number(spreadInput.value) || 0));
     const state = stateSelect.value;
+    spreadInput.value = String(coverage);
+    spread.setAttribute("aria-valuenow", String(coverage));
     spread.style.width = `${coverage}%`;
     spread.dataset.coverage = String(coverage);
     log.textContent = `butter> ${butterCopy[state]} at ${coverage}% coverage`;
